@@ -1,6 +1,5 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { AuthProvider } from './context/AuthContext';
 import { Navbar } from './components/Navbar';
 import { HomePage } from './pages/HomePage';
 import { AdminDashboard } from './pages/AdminDashboard';
@@ -12,7 +11,6 @@ import { Report } from './pages/Report';
 
 function App() {
   return (
-    <AuthProvider>
       <Router>
         <div className="min-h-screen bg-gray-50">
           <Navbar />
@@ -27,7 +25,6 @@ function App() {
           </Routes>
         </div>
       </Router>
-    </AuthProvider>
   );
 }
 

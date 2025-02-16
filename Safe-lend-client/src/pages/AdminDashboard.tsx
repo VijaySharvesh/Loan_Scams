@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Shield, AlertTriangle, Users, Activity, Plus } from 'lucide-react';
-import { useAuth } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 
 interface AdminStats {
@@ -28,14 +27,10 @@ interface ScamReport {
 }
 
 export function AdminDashboard() {
-  const { user, isAuthenticated } = useAuth();
-  const navigate = useNavigate();
 
+ 
   useEffect(() => {
-    if (!isAuthenticated || user?.role !== 'admin') {
-      navigate('/login');
-    }
-  }, [isAuthenticated, user, navigate]);
+});
 
   const [stats] = useState<AdminStats>({
     totalLenders: 10,

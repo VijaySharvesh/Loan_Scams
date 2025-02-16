@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
 
 export function Register() {
   const [email, setEmail] = useState('');
@@ -9,7 +8,6 @@ export function Register() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
   const navigate = useNavigate();
-  const { login } = useAuth();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -22,7 +20,7 @@ export function Register() {
     setError('');
 
     try {
-      const response = await fetch('/api/auth/register', {
+      const response = await fetch('http://localhost:5000/api/users', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password }),
@@ -31,9 +29,6 @@ export function Register() {
       if (!response.ok) {
         throw new Error('Registration failed');
       }
-
-      const data = await response.json();
-      login(data.token);
       navigate('/');
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An error occurred');

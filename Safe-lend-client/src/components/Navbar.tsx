@@ -2,17 +2,17 @@ import React from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Building2, Shield, ShieldAlert, UserCog, LogOut } from 'lucide-react';
 import { cn } from '../lib/utils';
-import { useAuth } from '../context/AuthContext';
+
 
 export function Navbar() {
   const location = useLocation();
   const navigate = useNavigate();
-  const { user, logout, isAuthenticated } = useAuth();
+
 
   const isActive = (path: string) => location.pathname === path;
 
   const handleLogout = () => {
-    logout();
+
     navigate('/login');
   };
 
@@ -64,26 +64,7 @@ export function Navbar() {
           </nav>
 
           <div className="flex items-center space-x-4">
-            {isAuthenticated ? (
-              <>
-                {user?.role === 'admin' && (
-                  <Link
-                    to="/admin"
-                    className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-                  >
-                    <UserCog className="w-4 h-4 mr-2" />
-                    Admin
-                  </Link>
-                )}
-                <button
-                  onClick={handleLogout}
-                  className="inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-                >
-                  <LogOut className="w-4 h-4 mr-2" />
-                  Logout
-                </button>
-              </>
-            ) : (
+          
               <>
                 <Link
                   to="/login"
@@ -98,7 +79,7 @@ export function Navbar() {
                   Register
                 </Link>
               </>
-            )}
+           
           </div>
         </div>
       </div>

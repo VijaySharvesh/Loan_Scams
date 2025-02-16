@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
 
 export function Login() {
   const [email, setEmail] = useState('');
@@ -8,7 +7,7 @@ export function Login() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
   const navigate = useNavigate();
-  const { login } = useAuth();
+
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -26,8 +25,6 @@ export function Login() {
         throw new Error('Invalid credentials');
       }
 
-      const data = await response.json();
-      login(data.token);
       navigate('/');
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An error occurred');
