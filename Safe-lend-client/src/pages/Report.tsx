@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Navbar } from '../components/Navbar';
 import { AlertTriangle, Send } from 'lucide-react';
 
 export function Report() {
@@ -65,6 +66,8 @@ export function Report() {
   }
 
   return (
+    <div>
+      <Navbar/>
     <div className="max-w-3xl mx-auto px-4 py-12">
       <div className="text-center mb-8">
         <AlertTriangle className="h-12 w-12 text-red-600 mx-auto mb-4" />
@@ -189,6 +192,7 @@ export function Report() {
           </button>
         </form>
       </div>
+    </div>
     </div>
   );
 }

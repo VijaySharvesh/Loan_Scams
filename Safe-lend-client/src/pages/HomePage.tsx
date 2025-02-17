@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Shield, ShieldAlert, TrendingUp, Users } from 'lucide-react';
 import { SearchBar } from '../components/SearchBar';
+import { Navbar } from '../components/Navbar';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination, Navigation } from 'swiper/modules';
 import { useInView } from 'react-intersection-observer';
@@ -39,6 +40,8 @@ export function HomePage() {
   });
 
   return (
+    <div>
+      <Navbar/>
     <div className="min-h-screen bg-gray-50">
       {/* Search Section */}
       <div className="bg-white shadow-sm border-b sticky top-16 z-40">
@@ -203,6 +206,7 @@ export function HomePage() {
           </div>
         </div>
       </section>
+    </div>
     </div>
   );
 }

@@ -1,8 +1,11 @@
 import React from 'react';
+import { Navbar } from '../components/Navbar';
 import { Phone, Mail, FileText, Users, ArrowRight } from 'lucide-react';
 
 export function LegalAssistance() {
   return (
+    <div>
+      <Navbar/>
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       <div className="text-center mb-12">
         <h1 className="text-4xl font-bold text-gray-900 mb-4">Legal Assistance Center</h1>
@@ -123,6 +126,7 @@ export function LegalAssistance() {
           Join Support Group
         </button>
       </div>
+    </div>
     </div>
   );
 }

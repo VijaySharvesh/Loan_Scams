@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+import { Navbar } from '../components/Navbar';
 import { SearchBar } from '../components/SearchBar';
 import { LenderList } from '../components/LenderList';
 import { ShieldCheck, AlertTriangle } from 'lucide-react';
@@ -28,6 +29,8 @@ export function LenderVerification() {
   }, []);
 
   return (
+    <div>
+      <Navbar/>
     <div className="max-w-7xl mx-auto p-6">
       <h2 className="text-center text-3xl font-bold mb-4">Lender Verification</h2>
       <SearchBar />
@@ -43,6 +46,7 @@ export function LenderVerification() {
         ))}
       </div>
       <LenderList type={activeTab} lenders={activeTab === 'verified' ? verifiedLenders : scamLenders} />
+    </div>
     </div>
   );
 }
