@@ -1,18 +1,22 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { Building2, Shield, ShieldAlert, UserCog, LogOut } from 'lucide-react';
+import { Building2, Shield, ShieldAlert, LogOut } from 'lucide-react';
 import { cn } from '../lib/utils';
-
 
 export function Navbar() {
   const location = useLocation();
   const navigate = useNavigate();
+  const [isAuthenticated, setIsAuthenticated] = useState(!!localStorage.getItem('token'));
 
+  useEffect(() => {
+    setIsAuthenticated(!!localStorage.getItem('token'));
+  }, [location.pathname]); // Re-run check when route changes
 
   const isActive = (path: string) => location.pathname === path;
 
   const handleLogout = () => {
-
+    localStorage.removeItem('token');
+    setIsAuthenticated(false);
     navigate('/login');
   };
 
@@ -30,8 +34,8 @@ export function Navbar() {
               to="/"
               className={cn(
                 "inline-flex items-center px-1 pt-1 text-sm font-medium",
-                isActive('/') 
-                  ? "text-blue-600 border-b-2 border-blue-600" 
+                isActive('/')
+                  ? "text-blue-600 border-b-2 border-blue-600"
                   : "text-gray-500 hover:text-gray-700 hover:border-gray-300"
               )}
             >
@@ -64,7 +68,15 @@ export function Navbar() {
           </nav>
 
           <div className="flex items-center space-x-4">
-          
+            {isAuthenticated ? (
+              <button
+                onClick={handleLogout}
+                className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+              >
+                <LogOut className="w-4 h-4 mr-2" />
+                Logout
+              </button>
+            ) : (
               <>
                 <Link
                   to="/login"
@@ -79,7 +91,7 @@ export function Navbar() {
                   Register
                 </Link>
               </>
-           
+            )}
           </div>
         </div>
       </div>

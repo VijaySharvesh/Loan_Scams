@@ -10,6 +10,7 @@ export function Report() {
     description: '',
     evidenceUrls: '',
   });
+
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState('');
@@ -18,9 +19,9 @@ export function Report() {
     e.preventDefault();
     setIsSubmitting(true);
     setError('');
-    
+
     try {
-      const response = await fetch('/api/lenders/report', {
+      const response = await fetch('http://localhost:5000/api/reports', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -29,12 +30,13 @@ export function Report() {
       });
 
       if (!response.ok) {
-        throw new Error('Failed to submit report');
+        const errorData = await response.json();
+        throw new Error(errorData.message || 'Failed to submit report');
       }
 
       setSubmitted(true);
-    } catch (error) {
-      console.error('Error submitting report:', error);
+    } catch (err) {
+      console.error('Error submitting report:', err);
       setError('Failed to submit report. Please try again.');
     } finally {
       setIsSubmitting(false);
@@ -68,7 +70,7 @@ export function Report() {
         <AlertTriangle className="h-12 w-12 text-red-600 mx-auto mb-4" />
         <h1 className="text-3xl font-bold text-gray-900 mb-4">Report a Fraudulent Lender</h1>
         <p className="text-gray-600">
-          Help protect others by reporting suspicious or fraudulent lending activities
+          Help protect others by reporting suspicious or fraudulent lending activities.
         </p>
       </div>
 
